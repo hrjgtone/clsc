@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>001多图层图元修改方法</title>
+</head>
+
+<body>
+<div align="center">
+  <h1>多图层图元修改方法</h1>
+</div>
+<h4>&nbsp;<strong>1、故障背景</strong><strong> </strong></h4>
+<p >&#9;在将故障点定义为综合监控界面图元显示的时候我们可以在任意一台工作站上对图元进行修改，包括设备编号（不含点击设备图元之后设备详情选项卡内的描述）及位置。 </p>
+<h4><strong>2、注意事项</strong><strong> </strong></h4>
+<p >&#9;2.1在修改图元前应注意SVN版本库对应版本号，提前更新版本库到本地； <br />
+  &#9;2.2修改图元等信息，应遵循设计-现场-点表（ISCS-BAS）-数据库多方统一方可进行修改。 </p>
+<h4><strong>3、所需工器具</strong><strong> </strong></h4>
+<h4><strong>4</strong><strong>、技术操作流程及步骤</strong><strong> </strong></h4>
+<p >&#9;4.1在任意一台工作站上使用Ctrl+T打开shell界面，如图1 <br />
+  <img src="pic/001多图层图元修改方法_wpsAF5B.tmp.jpg" alt="4.1.1" width="526" height="328" />&nbsp;<br />
+  4.2更新本地工作站上的版本库：输入指令如下 <br />
+  $svn up /var/www <br />
+  执行结果如下： <br />
+  U    /var/www/schematics/cctv/build.cctv <br />
+  U    /var/www/schematics/cctv/generated/hfz_cctv_cameras.xhtml <br />
+  U    /var/www/schematics/cctv/source/hfz_cctv_cameras.svg <br />
+  版本 141 <br />
+  此为完成本地版本库的更新 <br />
+  4.3使用cd命令进入对应的图元存放地，此处以cctv图元为例： <br />
+  在命令行输入$cd /var/www/schematics/cctv/source/ <br />
+  然后使用&#8221;nautilus .&#8221;命令打开视窗如图2（注意：后面有个符号&#8221;.&#8221;） <br />
+  <img src="pic/001多图层图元修改方法_wpsAF5C.tmp.jpg" alt="4.3.1" width="554" height="325" />&nbsp;<br />
+  双击你所要修改的图元文件，打开编辑界面，如图3； <br />
+  <img src="pic/001多图层图元修改方法_wpsAF6D.tmp.jpg" alt="4.3.2" width="554" height="312" />&nbsp;<br />
+  （注：如果此图元文件为多图层文件时，需选择对应的图层进行修改。在mynkscape的菜单栏中选中&#8221;层&#8221;-&gt;&#8220;层&#8221;，将会出现如图4中的侧边栏。） <br />
+  <img src="pic/001多图层图元修改方法_wpsAF7D.tmp.jpg" alt="4.3.3" width="554" height="311" />点选图层名称左侧的类似眼睛一样的图标将会显示不同的图层。（注意：main图层必须处于显示状态） <br />
+  修改完毕后保存关闭文件。 <br />
+  4.4返回shell界面 <br />
+  &#9312;输入：svn st （查看修改图层名字） <br />
+  &#9313;对图元进行编译（须在被修改的图元同级目录下）：./loadsvg hfz_cctv_cameras.svg。其中红色字体为所修改的图元文件名。 <br />
+  执行后会显示类似如下的样式： <br />
+  engineer@dg2dms11:/var/www/schematics/cctv/source$ ./loadsvg hfz_cctv_cameras.svg <br />
+  Building SVG file====&gt;&gt;hfz_cctv_cameras.svg <br />
+  [Generate] cctv/generated/hfz_cctv_cameras.xhtml <br />
+  rm -f build.cctv <br />
+  whoami &gt;&gt; build.cctv <br />
+  hostname &gt;&gt; build.cctv <br />
+  date &gt;&gt; build.cctv <br />
+  4.5使用cd ..命令返回上级目录，使用svn ci命令查看所需更新的版本库文件，如图5 <br />
+  <img src="pic/001多图层图元修改方法_wpsAF8E.tmp.jpg" alt="4.5.1" width="517" height="304" />&nbsp;<br />
+  查看是否为对应修改的图元，确认无误后按住Ctrl+X会出现图6的界面 <br />
+  <img src="pic/001多图层图元修改方法_wpsAF9F.tmp.jpg" alt="4.5.1" width="517" height="304" />然后输入字符c，然后回车。 <br />
+  界面会输入如下字符： <br />
+  正在发送       cctv/build.cctv <br />
+  正在发送       cctv/generated/hfz_cctv_cameras.xhtml <br />
+  正在发送       cctv/source/hfz_cctv_cameras.svg <br />
+  传输文件数据 ... <br />
+  提交后的版本为 142。 <br />
+  当出现版本号后，即为提交成功 <br />
+  4.6登录对应车站及中心服务器，使用svn up /var/www命令更新服务器上的文件。执行成功后会输入如下字符： <br />
+  engineer@dg2socc01:~$ svn up /var/www <br />
+  正在升级 '/var/www': <br />
+  U    /var/www/schematics/cctv/build.cctv <br />
+  U    /var/www/schematics/cctv/generated/hfz_cctv_cameras.xhtml <br />
+  U    /var/www/schematics/cctv/source/hfz_cctv_cameras.svg <br />
+  更新到版本 142。 <br />
+  其中版本号应和你提交给版本库的版本号保持一致。 </p>
+</body>
+</html>

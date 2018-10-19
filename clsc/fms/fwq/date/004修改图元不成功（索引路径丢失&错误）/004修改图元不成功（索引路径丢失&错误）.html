@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>004修改图元不成功（索引路径丢失&错误）</title>
+</head>
+
+<body>
+<div align="center">
+  <h1>004修改图元不成功（索引路径丢失&amp;错误）</h1>
+</div>
+<h4><strong>1、故障背景</strong><strong> </strong></h4>
+<p >在工作站上修改图元并成功上传后刷新工作站界面或重启工作站后仍显示原有界面。 <br />
+  某些时候发现工作站连接其中一台服务器时显示正常,而连接另一台服务器显示异常。 </p>
+<h4><strong>2、注意事项</strong><strong> </strong></h4>
+<p >&#9;2.1确保修改图元的操作流程按《多图层图元修改方法》中的操作指引操作； <br />
+  &#9;2.2如刷新不成功,可尝试重启工作站或远程登录站点界面观察是否正常； </p>
+<h4><strong>3、所需工器具</strong><strong> </strong></h4>
+<p >3.1综合监控工作站 </p>
+<h4><strong>4</strong><strong>、技术操作流程及步骤</strong><strong> </strong></h4>
+<p >4.1在所需修改界面的内点击鼠标右键点选&#8220;审查元素&#8221;，弹出如下图所示界面： <br />
+  <img src="pic/004修改图元不成功（索引路径丢失&amp;错误）_wps86F1.tmp.jpg" alt="4.1.1" width="554" height="390" />&nbsp;</p>
+<p >4.2观察上图框出部分的文件路径及名称是否正确，如不正确则点选HMI界面上的&#8220;系统&#8221;-&#8220;工具箱&#8221;-&#8220;显示索引&#8221;，显示界面如下图所示： <br />
+  <img src="pic/004修改图元不成功（索引路径丢失&amp;错误）_wps8702.tmp.jpg" alt="4.2.1" width="554" height="312" />&nbsp;</p>
+<p >4.3在搜索一栏中输入所修改图元的文件名按回车键进行搜索，以旗峰站FAS为例&#8220;qfz_fas_tunnel&#8221;。搜索结果如下图所示： <br />
+  <img src="pic/004修改图元不成功（索引路径丢失&amp;错误）_wps8712.tmp.jpg" alt="4.3.1" width="554" height="152" />&nbsp;</p>
+<p >4.4如果显示结果有多条，则观察&#8220;路径&#8221;一列是否正确，然后将不正确的路径下的文件进行删除。删除方法可参照《修改版本库内的内容（增加&amp;删除）》步骤进行，删除其中的svg、xhtml以及sub文件。 <br />
+  4.5删除操作完成后，需在相关服务器上进行版本库更新，使得删除操作生效，此时所修改界面可能会出现显示白屏出错，重新刷新界面或重启工作站即可恢复正常。 </p>
+</body>
+</html>

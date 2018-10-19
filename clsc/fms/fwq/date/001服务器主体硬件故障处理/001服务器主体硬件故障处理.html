@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>001服务器主体硬件故障处理</title>
+</head>
+
+<body>
+<div align="center">
+  <h1>服务器主体硬件故障处理</h1>
+</div>
+<h4><strong>1、故障背景</strong><strong> </strong></h4>
+<p >&#9;服务器前、后面板上故障灯亮。附服务器前面板指示灯示意图 <br />
+  <img src="pic/001服务器主体硬件故障处理_wps7CE9.tmp.jpg" alt="1.1" width="554" height="532" />&nbsp;</p>
+<h4><strong>2、注意事项</strong><strong> </strong></h4>
+<p >&#9;服务器主体硬件故障多种情况，其故障指示灯也分别独立，在处理时需做好区分，提高判断及处理速度。 </p>
+<h4><strong>3、所需工器具</strong><strong> </strong></h4>
+<p >&#9;3.1笔记本（预装SCRT）； </p>
+<h4><strong>4</strong><strong>、技术操作流程及步骤</strong><strong> </strong></h4>
+<p >&#9;在电源故障、顶部风扇故障及硬盘故障时，均有独立状态指示灯作为提示，此处不再进行展开说明，更换对应配件即可。其中更换硬盘故障作为独立案例进行说明。 <br />
+  4.1使用笔记本通过RJ45连接服务器后面板上net mgt网口，配置笔记本ip地址192.168.A.B。其中&#8221;A&#8221;为车站号，与服务器车站序号一致，&#8221;B&#8221;为0-255任意一数字。 <br />
+  4.2使用SCRT连接登录，登录地址为192.168.A.1/2，其中地址D段1为1号服务器，2为二号服务器。输入用户名：root；密码：changeme。 <br />
+  4.3在命令提示符界面，输入&#8221;-&gt;show faulty&#8221;打印如下图所示内容: <br />
+  <img src="pic/001服务器主体硬件故障处理_wps7CFA.tmp.jpg" alt="4.3.1" width="554" height="304" />&nbsp;<br />
+  其中第一行property为fru为故障项，value为具体故障内容。 <br />
+  4.4继续在命令行内输入&#8221;start /SP/faultmgmt/shell&#8221;进入故障处理菜单，如下图所示 <br />
+  <img src="pic/001服务器主体硬件故障处理_wps7D0A.tmp.jpg" alt="4.4.1" width="454" height="49" />&nbsp;<br />
+  输入&#8221;y&#8221;后按回车键确认。 <br />
+  4.5继续输入&#8221;fmadm faulty&#8221;查看具体故障信息，输出内容如下图所示： <br />
+  <img src="pic/001服务器主体硬件故障处理_wps7D1B.tmp.jpg" alt="4.5.1" width="554" height="312" />&nbsp;<br />
+  4.6如果此故障判断为偶发性故障，可尝试使用清除命令检查是否继续报出。执行&#8221;fmadm repair /SYS/MB&#8221;命令，其中&#8221;/SYS/MB&#8221;为步骤（3）中的&#8221;value&#8221;值； <br />
+  4.7验证是否持续报出故障 <br />
+  &#9;再次执行指令&#8221;fmadm repair /SYS/MB&#8221;，如反馈输出&#8221;No faults found&#8221;则说明故障已消除，如故障任然存在，则需对硬件进行更换处理。 </p>
+<p>&nbsp;</p>
+</body>
+</html>
